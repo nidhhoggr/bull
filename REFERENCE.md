@@ -96,6 +96,7 @@ interface AdvancedSettings {
   retryProcessDelay: number = 5000; // delay before processing next job in case of internal error.
   backoffStrategies: {}; // A set of custom backoff strategies keyed by name.
   drainDelay: number = 5; // A timeout for when the queue is in drained state (empty waiting for jobs).
+  expiresIn: number = 0, The amount of time in seconds to expire all jobs in the queue from redis
 }
 ```
 
@@ -118,6 +119,8 @@ __Warning:__ Do not override these advanced settings unless you understand the i
 `backoffStrategies`: An object containing custom backoff strategies. The key in the object is the name of the strategy and the value is a function that should return the delay in milliseconds. For a full example see [Patterns](./PATTERNS.md#custom-backoff-strategy).
 
 `drainDelay`: A timeout for when the queue is in `drained` state (empty waiting for jobs). It is used when calling `queue.getNextJob()`, which will pass it to `.brpoplpush` on the Redis client.
+
+`expiresIn`: A TTL to set in redis for the records of the job. This number applies to all jobs within the queue. This defaults to 0 so no jobs will expire.
 
 ```js
 backoffStrategies: {
