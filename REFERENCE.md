@@ -96,7 +96,7 @@ interface AdvancedSettings {
   retryProcessDelay: number = 5000; // delay before processing next job in case of internal error.
   backoffStrategies: {}; // A set of custom backoff strategies keyed by name.
   drainDelay: number = 5; // A timeout for when the queue is in drained state (empty waiting for jobs).
-  expiresIn: number = 0, The amount of time in seconds to expire all jobs in the queue from redis
+  expiresIn: number = 0; // The amount of time in seconds to expire all jobs in the queue from redis.
 }
 ```
 
